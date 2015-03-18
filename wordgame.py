@@ -244,4 +244,5 @@ def display_top():
 def display_about():
     return render_template("about.html",the_title="WordGame")
 app.secret_key = 'IGI&AD^DAD6*AUIA14819Duiad&^DA&^*6768'
-app.run(debug=True,host="0.0.0.0",port=80,threaded=True)
+if __name__ == '__main__':
+    app.run()
