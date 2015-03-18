@@ -1,0 +1,57 @@
+{% extends "template.html" %}
+
+{% block the_body %}
+
+<div class="col-sm-8 col-sm-offset-2">
+	<div class="center">
+		Source word: {{the_source_word}}<br><br>
+		Below please submit the 7 words created from the letters contained within the above source word<br><br>
+		<form class="form" action="{{ url_for('display_result') }}" method="POST">
+			<div class="input-group input-group-xs" style="padding-bottom: 5px;">
+				<span class="input-group-addon">1</span>
+				<input type="text" class="form-control" name="first" autocomplete="off">
+			</div>
+			<div class="input-group input-group-xs" style="padding-bottom: 5px;">
+				<span class="input-group-addon">2</span>
+				<input type="text" class="form-control" name="second" autocomplete="off">
+			</div>
+			<div class="input-group input-group-xs" style="padding-bottom: 5px;">
+				<span class="input-group-addon">3</span>
+				<input type="text" class="form-control" name="third" autocomplete="off">
+			</div>
+			<div class="input-group input-group-xs" style="padding-bottom: 5px;">
+				<span class="input-group-addon">4</span>
+				<input type="text" class="form-control" name="fourth" autocomplete="off">
+			</div>
+			<div class="input-group input-group-xs" style="padding-bottom: 5px;">
+				<span class="input-group-addon">5</span>
+				<input type="text" class="form-control" name="fifth" autocomplete="off">
+			</div>
+			<div class="input-group input-group-xs" style="padding-bottom: 5px;">
+				<span class="input-group-addon">6</span>
+				<input type="text" class="form-control" name="sixth" autocomplete="off">
+			</div>
+			<div class="input-group input-group-xs" style="padding-bottom: 5px;">
+				<span class="input-group-addon">7</span>
+				<input type="text" class="form-control" name="seventh" autocomplete="off">
+			</div>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+				<div class="alert alert-warning alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					{% for message in messages %}
+						<i class="fa fa-exclamation-triangle fa-lg"></i> {{ message }}
+					{% endfor %}
+				</div>
+				{% endif %}
+			{% endwith %}
+			<input type="hidden" value="{{the_source_word}}" name="source">
+			<input type="submit" value="Submit" class="btn btn-default form-control">
+		</form>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "template.html" %}
+
+{% block the_body %}
+<div class="col-sm-8 col-sm-offset-2">
+	<div class="col-sm-8 col-sm-offset-2">
+		{% if session['valid'] == True %}
+		<span class="center" style="width:100%"><h2>Congratulations!</h2><br>
+			<h5>You have managed to successfully complete your task<br>
+			It took you: {{time_result}} seconds<br>
+			If you wish to submit your result and see your rank, provide a name below and hit Submit.</h5>
+			<form class="form" action="{{ url_for('display_score') }}" method="POST">
+				<div class="input-group input-group-xs" style="padding-bottom: 5px;">
+					<span class="input-group-addon">Name</span>
+					<input type="text" class="form-control" name="name" autocomplete="off">
+				</div>
+				<input type="submit" value="Submit" class="btn btn-default form-control">
+			</form>
+		</span>
+		{% endif %}
+		{% if session['valid'] == False %}
+		<span class="center" style="width:100%">
+			<h5><img src={{ url_for('static',filename="siriusly.jpg")}} alt="What's wrong with you??" width="75%"></img><br>
+			<p> </p>You have failed to complete the task successfully<br>
+			See the summary table below for more information<br></h5>
+		</span>
+		{% endif %}
+		<span class="center" style="width:100%"><h2>Summary</h2></span>
+	</div>
+	<br><br>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Word</th>
+				<th>Info</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for input,flag in stored_input_flags %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{input}}</td>
+				<td>{{flag}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div class="col-sm-6 col-sm-offset-3">
+		{% if session['valid'] == False %}
+		<span class="center" style="width:100%">
+			<h2><a class="btn btn-default" href='/game'><i class="fa fa-refresh fa-lg"></i> Try again</a></h2>
+		</span>
+		{% endif %}
+	</div>
+</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+</div>
+
+{% endblock %}

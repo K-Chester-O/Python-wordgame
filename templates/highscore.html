@@ -1,0 +1,55 @@
+{% extends "template.html" %}
+
+{% block the_body %}
+<div class="col-sm-8 col-sm-offset-2">
+	{% if the_rank == '1st' %}
+		<div class="center" style="width:100%">
+			<h4>Thanks for playing {{session['name']}} you were ranked: {{the_rank}}</h4><br>
+			<i class="fa fa-trophy fa-5x" style="color:#FFD700"></i>
+		</div>
+	{% elif the_rank == '2nd' %}
+		<div class="center" style="width:100%">
+			<h4>Thanks for playing {{session['name']}} you were ranked: {{the_rank}}</h4><br>
+			<i class="fa fa-trophy fa-5x" style="color:#c0c0c0"></i>
+		</div>
+	{% elif the_rank == '3rd' %}
+		<div class="center" style="width:100%">
+			<h4>Thanks for playing {{session['name']}} you were ranked: {{the_rank}}</h4><br>
+			<i class="fa fa-trophy fa-5x" style="color:#cd7f32"></i>
+		</div>
+	{% elif the_rank != '-1' %}
+		<div class="center" style="width:100%">
+			<h4>Thanks for playing {{session['name']}} you were ranked: {{the_rank}}</h4><br>
+		</div>
+	{% endif %}
+	<br><br>
+	<h2 class="center">Top 10</h2><br>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for t,n in top_ten %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{n}}</td>
+				<td>{{t}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+	{% if the_rank != '-1' %}
+		<span class="center" style="width:100%">
+			<h2><a class="btn btn-default" href='/game'><i class="fa fa-refresh fa-lg"></i> Try again</a></h2>
+		</span>
+	{% endif %}
+</div>
+
+{% endblock %}
